@@ -1,34 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node 
+struct node
 {
   int data;
-  struct node *prev;
   struct node *next;
 };
 
-// Function 1 : create the linked list
+// Function 1 : create a linked list
 struct node *create_list(int *count)
 {
   struct node *head = 0, *temp = 0, *newNode = 0;
   int n, more;
   
-  printf("Enter the number of node you wants to insert - ");
+  printf("How many nodes you want to add initially - ");
   scanf("%d", &n);
   
+  // create initial nodes
   for (int i = 0; i < n; i++)
   {
-    newNode = (struct node *)malloc(sizeof(struct node));
+    newNode = (struct node *)malloc(sizeof(struct node *));
     if (newNode == 0)
     {
       printf("Memory not allocated\n");
       exit(1);
     }
     
-    printf("Enter the data of node %d - ", i+1);
+    printf("Enter the data of the node %d - ", i+1);
     scanf("%d", &newNode->data);
-    newNode->prev = 0;
     newNode->next = 0;
     
     if (head == 0)
@@ -39,16 +38,15 @@ struct node *create_list(int *count)
     else
     {
       temp->next = newNode;
-      newNode->prev = temp;
       temp = newNode;
     }
     (*count)++;
   }
   
-  // Creating a another node if User wants to insert
-  while(1)
+  // Ask if user wants to add more nodes
+  while (1)
   {
-    printf("Do you Want to add a another node in linked list? (1 for Yes / 0 for No) - ");
+    printf("Do you want to add another node (1 for Yes / 0 for No) - ");
     scanf("%d", &more);
     
     if (more == 1)
@@ -62,7 +60,6 @@ struct node *create_list(int *count)
       
       printf("Enter the data of the new node - ");
       scanf("%d", &newNode->data);
-      newNode->prev = 0;
       newNode->next = 0;
       
       if (head == 0)
@@ -73,26 +70,25 @@ struct node *create_list(int *count)
       else
       {
         temp->next = newNode;
-        newNode->prev = temp;
         temp = newNode;
       }
       (*count)++;
     }
-    else
+    else 
     {
       break;
     }
   }
+  
   return head;
 }
 
 // Function 2 : print the linked list
 void print_list(struct node *head, int count)
 {
-  struct node *temp;
-  temp = head;
+  struct node *temp = head;
   
-  printf("\nThe linked list is - \n");
+  printf("\nThe Linked List is - ");
   while (temp != 0)
   {
     printf("%d  ", temp->data);
@@ -100,48 +96,48 @@ void print_list(struct node *head, int count)
   }
   printf("\n");
   
-  printf("The total number of nodes is - %d\n", count);
-  
+  printf("Total number of nodes - %d\n", count);
   printf("\n");
 }
 
-// Function 3 : insert a node at beginning of linked list
-struct node *insert_at_beg(struct node *head, int *count)
+// Function 3 : insert node at beginning
+struct node *insert_at_beginning(struct node *head, int *count)
 {
-  struct node *newNode = 0;
-  
-  newNode = (struct node *)malloc(sizeof(struct node));
+  struct node *newNode = (struct node *)malloc(sizeof(struct node));
   if (newNode == 0)
   {
     printf("Memory not allocated\n");
     exit(1);
   }
   
-  printf("Enter the data of node which you want to insert at beginning - ");
+  printf("Enter the data of new node at the beginning - ");
   scanf("%d", &newNode->data);
   
   newNode->next = head;
-  newNode->prev = 0;
   head = newNode;
   
   (*count)++;
+  
   return head;
 }
 
 void main()
 {
-  struct node *head = 0;
+  struct node *head;
   int count = 0;
   
-  // Create a linked list
+  // Function 1 : create list
   head = create_list(&count);
   
-  // Printing the linked list
+  // Function 2 : print list
   print_list(head, count);
   
-  // Inserting the node at the beginning of linked list
-  head = insert_at_beg(head, &count);
+  // function 3 : insert node at beginning
+  head = insert_at_beginning(head, &count);
   
-  // Printing the newly created linked list
+  //function 2 : print new list
   print_list(head, count);
 }
+
+  
+      

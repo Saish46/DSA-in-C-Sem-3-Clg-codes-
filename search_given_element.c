@@ -4,7 +4,6 @@
 struct node 
 {
   int data;
-  struct node *prev;
   struct node *next;
 };
 
@@ -29,7 +28,6 @@ struct node *create_list(int *count)
     
     printf("Enter the data of node %d - ", i+1);
     scanf("%d", &newNode->data);
-    newNode->prev = 0;
     newNode->next = 0;
     
     if (head == 0)
@@ -40,7 +38,6 @@ struct node *create_list(int *count)
     else
     {
       temp->next = newNode;
-      newNode->prev = temp;
       temp = newNode;
     }
     (*count)++;
@@ -63,7 +60,6 @@ struct node *create_list(int *count)
       
       printf("Enter the data of the new node  - ");
       scanf("%d", &newNode->data);
-      newNode->prev = 0;
       newNode->next = 0;
       
       if (head == 0)
@@ -74,7 +70,6 @@ struct node *create_list(int *count)
       else
       {
         temp->next = newNode;
-        newNode->prev = temp;
         temp = newNode;
       }
       (*count)++;
@@ -131,8 +126,7 @@ void search_given_element(struct node *head)
   }
   if (flag == 0)
   {
-    printf("Given element is not found in linked list\n");
-    printf("\n");
+    printf("Given element is not found in linked list");
   }
 }
 

@@ -4,7 +4,6 @@
 struct node 
 {
   int data;
-  struct node *prev;
   struct node *next;
 };
 
@@ -14,10 +13,10 @@ struct node *create_list(int *count)
   struct node *head = 0, *temp = 0, *newNode = 0;
   int n, more;
   
-  printf("Enter the number of nodes you wants to insert - ");
+  printf("How many nodes you want to insert initially - ");
   scanf("%d", &n);
   
-  // Creating initial nodes
+  // Creating the initial nodes
   for (int i = 0; i < n; i++)
   {
     newNode = (struct node *)malloc(sizeof(struct node));
@@ -29,7 +28,6 @@ struct node *create_list(int *count)
     
     printf("Enter the data of node %d - ", i+1);
     scanf("%d", &newNode->data);
-    newNode->prev = 0;
     newNode->next = 0;
     
     if (head == 0)
@@ -40,16 +38,15 @@ struct node *create_list(int *count)
     else
     {
       temp->next = newNode;
-      newNode->prev = temp;
       temp = newNode;
     }
     (*count)++;
   }
   
-  // Creating a node if user wants to create
+  // Insert a another node if user wants to insert
   while (1)
   {
-    printf("Do you wants to insert a another node? (1 for Yes / 0 for No) - ");
+    printf("Do you want to insert a another node? (1 for Yes / 0 for No) - ");
     scanf("%d", &more);
     
     if (more == 1)
@@ -63,7 +60,6 @@ struct node *create_list(int *count)
       
       printf("Enter the data of the new node - ");
       scanf("%d", &newNode->data);
-      newNode->prev = 0;
       newNode->next = 0;
       
       if (head == 0)
@@ -74,7 +70,7 @@ struct node *create_list(int *count)
       else
       {
         temp->next = newNode;
-        newNode->prev = temp;
+        temp = newNode;
       }
       (*count)++;
     }
@@ -89,8 +85,7 @@ struct node *create_list(int *count)
 // Function 2 : print the linked list
 void print_list(struct node *head, int count)
 {
-  struct node *temp;
-  temp = head;
+  struct node *temp = head;
   
   printf("\nThe linked list is - \n");
   while (temp != 0)
@@ -100,12 +95,11 @@ void print_list(struct node *head, int count)
   }
   printf("\n");
   
-  printf("The total number of nodes is - %d\n", count);
-  
+  printf("Total number of nodes - %d\n", count);
   printf("\n");
 }
 
-// Function 3 : inserting a node at the user specified position of the linked list
+// Function 3 : Insert the node at user specified position
 struct node *insert_at_position(struct node *head, int *count)
 {
   struct node *temp;
@@ -139,7 +133,6 @@ struct node *insert_at_position(struct node *head, int *count)
     
     newNode->next = temp->next;
     temp->next = newNode;
-    newNode->prev = temp;
     
     (*count)++;
   }
@@ -154,12 +147,37 @@ void main()
   // Create a linked list
   head = create_list(&count);
   
-  // Print a linked list
+  // Print the linked list
   print_list(head, count);
   
-  // Insert a node at end of the linked list
+  // Inserting a new node at user specified position  
   head = insert_at_position(head, &count);
   
   // Printing the newly created linked list
   print_list(head, count);
 }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

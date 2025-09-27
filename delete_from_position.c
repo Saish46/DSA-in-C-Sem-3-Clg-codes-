@@ -4,7 +4,6 @@
 struct node 
 {
   int data;
-  struct node *prev;
   struct node *next;
 };
 
@@ -29,7 +28,6 @@ struct node *create_list(int *count)
     
     printf("Enter the data of node %d - ", i+1);
     scanf("%d", &newNode->data);
-    newNode->prev = 0;
     newNode->next = 0;
     
     if (head == 0)
@@ -40,7 +38,6 @@ struct node *create_list(int *count)
     else
     {
       temp->next = newNode;
-      newNode->prev = temp;
       temp = newNode;
     }
     (*count)++;
@@ -63,8 +60,7 @@ struct node *create_list(int *count)
       
       printf("Enter the data of new node - ");
       scanf("%d", &newNode->data);
-      newNode->prev = 0;
-      newNode->next = 0;      
+      newNode->next = 0;
       
       if (head == 0)
       {
@@ -74,7 +70,6 @@ struct node *create_list(int *count)
       else
       {
         temp->next = newNode;
-        newNode->prev = temp;
         temp = newNode;
       }
       (*count)++;
@@ -117,25 +112,14 @@ struct node *delete_from_position(struct node *head, int *count)
   printf("Enter the position of the node Which you wants to delete - ");
   scanf("%d", &pos);
   
-  if (pos == 1)
+  while (i < pos)
   {
-    temp = head;
-    head = temp->next;
-    head->prev = 0;
+    prevNode = temp;
+    temp = temp->next;
+    i++;
   }
-  else
-  {
-    while (i < pos)
-    {
-      prevNode = temp;
-      temp = temp->next;
-      i++;
-    }
-    nextNode = temp->next;
-    prevNode->next = nextNode;
-    nextNode->prev = prevNode;
-  }
-  
+  nextNode = temp->next;
+  prevNode->next = nextNode;
   free(temp);
   (*count)--;
   return head;
