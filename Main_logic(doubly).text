@@ -1,0 +1,25 @@
+newNode = (struct node *)malloc(sizeof(struct node));
+    if (newNode == 0)
+    {
+      printf("Memory not allocated\n");
+      exit(1);
+    }
+    
+    printf("Enter the data of the node %d - ", i+1);
+    scanf("%d", &newNode->data);
+    newNode->prev = 0;
+    newNode->next = 0;
+    
+    if (head == 0)
+    {
+      head = newNode;
+      temp = head;
+    }
+    else
+    {
+      temp->next = newNode;
+      newNode->prev = temp;
+      temp = newNode;
+    }
+    (*count)++;
+  
