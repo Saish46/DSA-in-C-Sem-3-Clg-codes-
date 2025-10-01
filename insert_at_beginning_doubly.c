@@ -122,6 +122,7 @@ struct node *insert_at_beg(struct node *head, int *count)
   
   newNode->next = head;
   newNode->prev = 0;
+  head->prev = newNode;
   head = newNode;
   
   (*count)++;
