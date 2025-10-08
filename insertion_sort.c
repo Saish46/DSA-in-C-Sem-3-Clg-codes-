@@ -20,7 +20,7 @@ void insertion_sort(int arr[], int n)                       // Function to perfo
     temp = arr[i];                                        // Here we always save the first element of unsorted sublist
     j = i - 1;                                            // Element's position of back most of first element of unsorted sublist, means position of first element of sorted sublist
     
-    while (i >= 0 && arr[j] > temp)
+    while (j >= 0 && arr[j] > temp)
     {
       arr[j + 1] = arr[j];                                // If 1st element of sorted sublist is greater than temp(1st element of unsorted sublist) and ith position is greater than 0 then,
       j--;                                                // Element which is on 1st position of the sorted sublist is store in 1st position of the unsorted sublist
